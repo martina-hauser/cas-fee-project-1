@@ -3,13 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+          integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
   <script src="scripts/index.js" type="module"></script>
 
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-<h1>Note App</h1>
+
+<header class="controls">
+  <div class="basic-controls">
+    <button class="custom-button" type="button">Create new</button>
+    <form class="app-style-form">
+      <label for="app-style" class="">Darkmode</label>
+      <span class="toggle-indicator">Off</span>
+      <div class="app-style-toggle-switch app-style-toggle-switch-body">
+        <input id="app-style" name="app-style" type="checkbox">
+        <div class="app-style-toggle-switch-head app-style-toggle-switch-head-on"></div>
+      </div>
+      <span class="toggle-indicator">On</span>
+    </form>
+  </div>
+  <div class="filter-controls">
+    <div class="filter-group">
+      <button class="custom-button active-filter" type="button">By finish date</button>
+      <button class="custom-button" type="button">By start date</button>
+      <button class="custom-button" type="button">By importance</button>
+    </div>
+    <button class="custom-button" type="button">Show finished</button>
+  </div>
+</header>
+
+<main class="note-cards">
+  <div class="note-date">Duedate</div>
+
+  <div class="note-card">
+    <div class="note-state">
+      <input id="note-state" name="note-state" type="checkbox" value="done">
+      <label for="note-state">Finished [finished-date]</label>
+    </div>
+    <p class="note-title">Title</p>
+    <div class="note-importance">Importance Icon</div>
+    <div class="note-description">
+      Description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+      labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </div>
+    <div class="note-edit-button-container">
+      <a class="note-edit-button custom-button" href="edit.html">Edit</a>
+    </div>
+  </div>
+</main>
 
 </body>
 </html>
