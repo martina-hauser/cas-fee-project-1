@@ -37,7 +37,7 @@ main {
     justify-content: center;
 }
 
-main.note-cards {
+main.notes-container {
     width: 100%;
     margin-top: 10rem;
     padding: 0 4rem;
@@ -242,10 +242,18 @@ body.edit-note-container {
         "edit-title-label edit-title-input"
         "edit-description-label edit-description-textarea"
         "edit-importance-label edit-importance-select"
-        "edit-deadline-label edit-deadline-input"
+        "edit-due-date-label edit-due-date-input"
         "edit-cancel-button edit-save-button";
     column-gap: 2rem;
     row-gap: 2rem;
+}
+
+.edit-note-form input,
+textarea,
+select {
+    padding: 0.25rem;
+    font-family: inherit;
+    font-size: 0.9em;
 }
 
 label[for="edit-note-title"] {
@@ -272,12 +280,12 @@ select#edit-note-importance {
     grid-area: edit-importance-select;
 }
 
-label[for="edit-note-deadline"] {
-    grid-area: edit-deadline-label;
+label[for="edit-note-due-date"] {
+    grid-area: edit-due-date-label;
 }
 
-input#edit-note-deadline {
-    grid-area: edit-deadline-input;
+input#edit-note-due-date {
+    grid-area: edit-due-date-input;
 }
 
 .edit-note-save-button {

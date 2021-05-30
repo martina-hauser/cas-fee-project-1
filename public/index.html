@@ -13,12 +13,12 @@
 
 <header class="controls">
   <div class="basic-controls">
-    <button class="custom-button" type="button">Create new</button>
+    <button class="add-note-button custom-button" type="button">Create new</button>
     <form class="app-style-form">
       <label for="app-style" class="">Darkmode</label>
       <span class="toggle-indicator">Off</span>
       <div class="app-style-toggle-switch app-style-toggle-switch-body">
-        <input id="app-style" name="app-style" type="checkbox">
+        <input id="app-style" class="app-style-switch" name="app-style" type="checkbox">
         <div class="app-style-toggle-switch-head app-style-toggle-switch-head-on"></div>
       </div>
       <span class="toggle-indicator">On</span>
@@ -26,20 +26,20 @@
   </div>
   <div class="filter-controls">
     <div class="filter-group">
-      <button class="custom-button active-filter" type="button">By finish date</button>
-      <button class="custom-button" type="button">By start date</button>
-      <button class="custom-button" type="button">By importance</button>
+      <button class="sort-by-due-date-button custom-button active-filter" type="button">By due date</button>
+      <button class="sort-by-created-date-button custom-button" type="button">By start date</button>
+      <button class="sort-by-importance-button custom-button" type="button">By importance</button>
     </div>
-    <button class="custom-button" type="button">Show finished</button>
+    <button class="show-finished-button custom-button" type="button">Show finished</button>
   </div>
 </header>
 
-<main class="note-cards">
-  <div class="note-date">Duedate</div>
+<main class="notes-container">
+  <div class="note-date">Due date</div>
 
   <div class="note-card">
     <div class="note-state">
-      <input id="note-state" name="note-state" type="checkbox" value="done">
+      <input id="note-state" class="note-state" name="note-state" type="checkbox" value="done">
       <label for="note-state">Finished [finished-date]</label>
     </div>
     <p class="note-title">Title</p>
@@ -50,7 +50,7 @@
       Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
     </div>
     <div class="note-edit-button-container">
-      <a class="note-edit-button custom-button" href="edit.html">Edit</a>
+      <a class="note-edit-button custom-button" href="edit.html" data-note-id="1">Edit</a>
     </div>
   </div>
 </main>
