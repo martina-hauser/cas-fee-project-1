@@ -1,23 +1,49 @@
 import Note from './note.js';
+import notes from './data/notemodel.js';
 
 class NoteService {
   constructor() {
     this.notes = [];
   }
 
-  orderByFinishedDate(note1, note2) {
-    return note2.finishDate - note1.finishDate;
+  loadData() {
+    this.notes = notes;
+  }
+
+  sortByDueDate(note1, note2) {
+    return note2.dueDate - note1.dueDate;
+  }
+
+  sortByCreatedDate(note1, note2) {
+    return note2.createdDate - note1.createdDate;
+  }
+
+  sortByImportance(note1, note2) {
+    return note2.importance - note1.importance;
+  }
+
+  filterByFinishedState(note) {
+    return note.finishedState;
   }
 
   // suggested functions for note-service.js
-  getNote(orderBy, filterBy) {
+  getNotes(sortBy, notes, filterBy = '') {
     // Notes aus dem Storage abrufen
-    if (orderBy === 'finishedDate') {
-      return [...this.notes].sort(this.orderByFinishedDate);
+    if (sortBy === 'dueDate') {
+      return [...notes].sort(this.sortByDueDate);
+    }
+    if (sortBy === 'createdDate') {
+      return [...notes].sort(this.sortByCreatedDate);
+    }
+    if (sortBy === 'importance') {
+      return [...notes].sort(this.sortByImportance);
+    }
+    if (sortBy === 'finishedState') {
+      return notes.filter(this.filterByFinishedState);
     }
   }
 
-  addNote(id, title, description, importance, createdDate, duedate, finishedState, finishedDate) {
+  addNote(id, title, description, importance, createdDate, dueDate, finishedState, finishedDate) {
     // neues Note in den Storage einfügen
     const note = new Note(
       id,
@@ -25,7 +51,7 @@ class NoteService {
       description,
       importance,
       createdDate,
-      duedate,
+      dueDate,
       finishedState,
       finishedDate,
       );

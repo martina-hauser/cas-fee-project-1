@@ -5,8 +5,38 @@
   <title>Note App</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
           integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="scripts/index.js" type="module"></script>
+<!--  <script src="scripts/index.js" type="module"></script>-->
   <script src="scripts/controller/note-controller.js" type="module" defer></script>
+
+  <script id="note-template" type="text/x-handlebars-template">
+    <div class="group-template-container">
+      {{#each this}}
+        <h2 class="note-date">{{ dueDate }}</h2>
+        <div class="note-card">
+          <div class="note-state">
+            <input id="note-state" class="note-state" name="note-state"
+                   type="checkbox"
+                   value="{{ finishedState }}"
+                   {{#if finishedState}}
+                        checked
+                   {{/if}}
+            >
+            <label for="note-state">Finished
+              {{#if finishedDate}}
+                [{{ finishedDate }}]
+              {{/if}}
+            </label>
+          </div>
+          <p class="note-title">{{ title }}</p>
+          <div class="note-importance">{{ importance }}</div>
+          <div class="note-description">{{ description }}</div>
+          <div class="note-edit-button-container">
+            <a class="note-edit-button custom-button" href="edit.html" data-note-id="{{ id }}">Edit</a>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </script>
 
   <link rel="stylesheet" href="styles/index.css">
 </head>
@@ -35,25 +65,25 @@
   </div>
 </header>
 
-<main class="notes-container">
-  <div class="note-date">Due date</div>
+<main id="notes-container" class="notes-container">
+<!--  <h2 class="note-date">Due date</h2>-->
 
-  <div class="note-card">
-    <div class="note-state">
-      <input id="note-state" class="note-state" name="note-state" type="checkbox" value="done">
-      <label for="note-state">Finished [finished-date]</label>
-    </div>
-    <p class="note-title">Title</p>
-    <div class="note-importance">Importance Icon</div>
-    <div class="note-description">
-      Description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-      labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-    </div>
-    <div class="note-edit-button-container">
-      <a class="note-edit-button custom-button" href="edit.html" data-note-id="1">Edit</a>
-    </div>
-  </div>
+<!--  <div class="note-card">-->
+<!--    <div class="note-state">-->
+<!--      <input id="note-state" class="note-state" name="note-state" type="checkbox" value="done">-->
+<!--      <label for="note-state">Finished [finished-date]</label>-->
+<!--    </div>-->
+<!--    <p class="note-title">Title</p>-->
+<!--    <div class="note-importance">Importance Icon</div>-->
+<!--    <div class="note-description">-->
+<!--      Description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut-->
+<!--      labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.-->
+<!--      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.-->
+<!--    </div>-->
+<!--    <div class="note-edit-button-container">-->
+<!--      <a class="note-edit-button custom-button" href="edit.html" data-note-id="1">Edit</a>-->
+<!--    </div>-->
+<!--  </div>-->
 </main>
 
 </body>

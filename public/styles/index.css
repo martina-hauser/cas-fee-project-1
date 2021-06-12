@@ -31,6 +31,10 @@ header {
     padding: 2rem 4rem;
 }
 
+header.controls {
+    background-color: var(--default-body-background-color);
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -140,12 +144,13 @@ label[for="app-style"] {
     background-color: var(--hover-button-fill-color);
 }
 
-.active-filter {
+.custom-button.active-filter {
     background-color: var(--active-button-fill-color);
 }
 
 .note-card {
     padding: 1.5rem;
+    margin-bottom: 2rem;
     background-color: var(--default-card-background-color);
     display: grid;
     grid-template-columns: 1fr repeat(2, 2fr) 1fr;
