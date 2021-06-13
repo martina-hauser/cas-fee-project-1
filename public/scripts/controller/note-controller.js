@@ -1,5 +1,7 @@
 import noteService from '../services/note-service.js';
 
+moment.locale('de-ch');
+
 export class NoteController {
   constructor() {
     this.notesTemplateCompiled = Handlebars.compile(document.getElementById('note-template').innerHTML);
@@ -106,6 +108,7 @@ export class NoteController {
   }
 
   initialize() {
+    console.log(moment().calendar());
     this.initEventHandlers();
     noteService.loadData();
     this.renderView();
