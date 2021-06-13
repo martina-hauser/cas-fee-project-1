@@ -64,7 +64,14 @@
       <button class="sort-by-created-date-button custom-button" type="button">By start date</button>
       <button class="sort-by-importance-button custom-button" type="button">By importance</button>
     </div>
-    <button class="show-finished-button custom-button" type="button">Show finished</button>
+    <form class="filter-state-form">
+      <label class="hidden-label" for="filter-state">Select state</label>
+      <select name="filter-state" id="filter-state" class="filter-state-select custom-control">
+        <option value="all">Show all</option>
+        <option value="unfinished">Show unfinished</option>
+        <option value="finished">Show finished</option>
+      </select>
+    </form>
   </div>
 </header>
 

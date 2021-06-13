@@ -124,6 +124,7 @@ label[for="app-style"] {
 }
 
 .custom-button,
+.custom-control,
 .note-card {
     display: inline-block;
     min-width: 10rem;
@@ -133,7 +134,8 @@ label[for="app-style"] {
     border-radius: 2px;
 }
 
-.custom-button {
+.custom-button,
+.custom-control {
     font-size: 100%;
     text-align: center;
     background-color: var(--default-secondary-button-fill-color);
@@ -146,6 +148,15 @@ label[for="app-style"] {
 
 .custom-button.active-filter {
     background-color: var(--active-button-fill-color);
+}
+
+.custom-control:hover {
+    background-color: var(--hover-button-fill-color);
+}
+
+.custom-control:focus,
+.custom-control:active {
+    background-color: var(--default-secondary-button-fill-color);
 }
 
 .note-card {

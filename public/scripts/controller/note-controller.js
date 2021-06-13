@@ -8,11 +8,13 @@ export class NoteController {
 
     this.notesContainer = document.querySelector('.notes-container');
     this.addNoteButton = document.querySelector('.add-note-button');
-    this.filterButtons = document.querySelector('.filter-controls');
+    this.filterButtons = document.querySelector('.filter-group');
+    this.sortBySelection = 'dueDate';
     this.sortByDueDateButton = document.querySelector('.sort-by-due-date-button');
     this.sortByCreatedDateButton = document.querySelector('.sort-by-created-date-button');
     this.sortByImportanceButton = document.querySelector('.sort-by-importance-button');
-    this.showFinishedButton = document.querySelector('.show-finished-button');
+    this.filterStateMenu = document.querySelector('.filter-state-select');
+    this.filterStateMenuSelection = 'all';
     this.initEditNoteButton = document.querySelector('.note-edit-button');
     this.finishNoteCheckbox = document.querySelector('.note-state');
     this.appStyleSwitch = document.querySelector('.app-style-switch');
@@ -45,30 +47,34 @@ export class NoteController {
     });
 
     this.filterButtons.addEventListener('click', (event) => {
-      [...this.filterButtons.querySelectorAll('button')].forEach((button) => {
+      this.filterButtons.querySelectorAll('button').forEach((button) => {
         button.classList.remove('active-filter');
       });
       event.target.classList.add('active-filter');
     });
 
+    this.filterStateMenu.addEventListener('change', (event) => {
+      this.filterStateMenuSelection = event.target.value;
+      this.showNotes();
+    });
+
     this.sortByDueDateButton.addEventListener('click', () => {
-      this.showNotes('dueDate');
+      this.sortBySelection = 'dueDate';
+      this.showNotes();
     });
 
     this.sortByCreatedDateButton.addEventListener('click', () => {
-      this.showNotes('createdDate');
+      this.sortBySelection = 'createdDate';
+      this.showNotes();
     });
 
     this.sortByImportanceButton.addEventListener('click', () => {
-      this.showNotes('importance');
-    });
-
-    this.showFinishedButton.addEventListener('click', () => {
-      this.showNotes('finishedState');
+      this.sortBySelection = 'importance';
+      this.showNotes();
     });
   }
 
-  showNotes(sortBy) {
+  showNotes() {
     // function getUniqueDueDates(notes) {
     //   let uniqueDueDates = new Set();
     //   notes.forEach((note) => {
@@ -98,7 +104,8 @@ export class NoteController {
     //   document.querySelector('#notes-container').insertAdjacentHTML('beforeend', createNotesFragmentHtmlString(group));
     // });
 
-    const sortedNotes = noteService.getNotes(sortBy, noteService.notes);
+    const filteredNotes = noteService.filterNotes(this.filterStateMenuSelection, noteService.notes);
+    const sortedNotes = noteService.sortNotes(this.sortBySelection, filteredNotes);
 
     document.querySelector('#notes-container').innerHTML = this.notesTemplateCompiled(sortedNotes);
   }
@@ -108,7 +115,6 @@ export class NoteController {
   }
 
   initialize() {
-    console.log(moment().calendar());
     this.initEventHandlers();
     noteService.loadData();
     this.renderView();

@@ -1,6 +1,8 @@
 import Note from './note.js';
 import notes from './data/notemodel.js';
 
+moment.locale('de-ch');
+
 class NoteService {
   constructor() {
     this.notes = [];
@@ -11,35 +13,46 @@ class NoteService {
   }
 
   sortByDueDate(note1, note2) {
-    return note2.dueDate - note1.dueDate;
+    return moment(note2.dueDate, 'DD-MM-YYYY').isSameOrBefore(moment(note1.dueDate, 'DD-MM-YYYY')) ? 1 : -1;
   }
 
   sortByCreatedDate(note1, note2) {
-    return note2.createdDate - note1.createdDate;
+    return moment(note2.createdDate, 'DD-MM-YYYY').isSameOrBefore(moment(note1.createdDate, 'DD-MM-YYYY')) ? 1 : -1;
   }
 
   sortByImportance(note1, note2) {
     return note2.importance - note1.importance;
   }
 
-  filterByFinishedState(note) {
+  getUnfinished(note) {
+    return !note.finishedState;
+  }
+
+  getFinished(note) {
     return note.finishedState;
   }
 
-  // suggested functions for note-service.js
-  getNotes(sortBy, notes, filterBy = '') {
-    // Notes aus dem Storage abrufen
+  filterNotes(filterBy = 'all', notesToFilter) {
+    if (filterBy === 'all') {
+      return notesToFilter;
+    }
+    if (filterBy === 'unfinished') {
+      return notesToFilter.filter(this.getUnfinished);
+    }
+    if (filterBy === 'finished') {
+      return notesToFilter.filter(this.getFinished);
+    }
+  }
+
+  sortNotes(sortBy = 'dueDate', notesToSort) {
     if (sortBy === 'dueDate') {
-      return [...notes].sort(this.sortByDueDate);
+      return [...notesToSort].sort(this.sortByDueDate);
     }
     if (sortBy === 'createdDate') {
-      return [...notes].sort(this.sortByCreatedDate);
+      return [...notesToSort].sort(this.sortByCreatedDate);
     }
     if (sortBy === 'importance') {
-      return [...notes].sort(this.sortByImportance);
-    }
-    if (sortBy === 'finishedState') {
-      return notes.filter(this.filterByFinishedState);
+      return [...notesToSort].sort(this.sortByImportance);
     }
   }
 
