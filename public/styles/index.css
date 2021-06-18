@@ -165,10 +165,11 @@ label[for="app-style"] {
     background-color: var(--default-card-background-color);
     display: grid;
     grid-template-columns: 1fr repeat(2, 2fr) 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: 1fr auto 1fr;
     grid-template-areas:
         "note-state note-title note-importance note-edit-button-container"
-        "note-state note-description note-description note-edit-button-container";
+        "note-state note-description note-description note-edit-button-container"
+        "note-state note-created-date note-due-date note-edit-button-container";
     column-gap: 1rem;
     row-gap: 0.5rem;
 }
@@ -200,6 +201,15 @@ label[for="app-style"] {
 
 .note-description {
     grid-area: note-description;
+    margin-bottom: 0.8rem;
+}
+
+.note-created-date {
+    grid-area: note-created-date;
+}
+
+.note-due-date {
+    grid-area: note-due-date;
 }
 
 .note-edit-button-container {

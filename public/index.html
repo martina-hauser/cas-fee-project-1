@@ -14,7 +14,6 @@
   <script id="note-template" type="text/x-handlebars-template">
     <div class="group-template-container">
       {{#each this}}
-        <h2 class="note-date">{{ dueDate }}</h2>
         <div class="note-card">
           <div class="note-state">
             <input id="note-state" class="note-state" name="note-state"
@@ -33,6 +32,8 @@
           <p class="note-title">{{ title }}</p>
           <div class="note-importance">{{ importance }}</div>
           <div class="note-description">{{ description }}</div>
+          <p class="note-created-date">Created: {{ createdDate }}</p>
+          <p class="note-due-date">Due date: <b>{{ dueDate }}</b></p>
           <div class="note-edit-button-container">
             <a class="note-edit-button custom-button" href="edit.html" data-note-id="{{ id }}">Edit</a>
           </div>
