@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Note App</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+          integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="../scripts/index.js" type="module"></script>
+  <script src="../scripts/controller/note-controller.js" type="module" defer></script>
+
+  <link rel="stylesheet" href="../styles/index.css">
+</head>
+<body class="edit-note-container">
+<main>
+  <h1 class="edit-note-title">Add note</h1>
+  <form class="edit-note-form">
+    <label for="edit-note-title">Title</label>
+    <input id="edit-note-title" name="edit-note-title" type="text" data-note-id="1">
+    <label for="edit-note-description">Description</label>
+    <textarea name="edit-note-description" id="edit-note-description" data-note-id="1"></textarea>
+    <label for="edit-note-importance">Importance</label>
+    <select id="edit-note-importance" name="edit-note-importance" data-note-id="1">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <label for="edit-note-due-date">Due date</label>
+    <input id="edit-note-due-date" name="edit-note-due-date" type="date" data-note-id="1">
+    <div class="edit-note-cancel-button-container">
+      <a class="edit-note-cancel-button custom-button" href="../index.html">Cancel</a>
+    </div>
+    <button class="edit-note-save-button custom-button" type="submit" data-note-id="1">Save</button>
+  </form>
+</main>
+</body>
+</html>

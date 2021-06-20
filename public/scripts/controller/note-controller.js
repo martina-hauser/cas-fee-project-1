@@ -17,7 +17,8 @@ export class NoteController {
     this.filterStateMenuSelection = 'all';
     this.initEditNoteButton = document.querySelector('.note-edit-button');
     this.finishNoteCheckbox = document.querySelector('.note-state');
-    this.appStyleSwitch = document.querySelector('.app-style-switch');
+    this.appStyleSwitch = document.querySelector('#app-style-switch');
+    this.documentBody = document.querySelector('body');
 
     this.editNoteForm = document.querySelector('.edit-note-form');
     this.editNoteTitleInput = document.querySelector('input#edit-note-title');
@@ -42,8 +43,12 @@ export class NoteController {
       });
     }
 
-    this.addNoteButton.addEventListener('click', (event) => {
-      this.addNoteModal.classList.add('show-modal');
+    this.appStyleSwitch.addEventListener('change', () => {
+      if (!this.documentBody.classList.contains('dark-mode')) {
+        this.documentBody.classList.add('dark-mode');
+      } else {
+        this.documentBody.classList.remove('dark-mode');
+      }
     });
 
     this.filterButtons.addEventListener('click', (event) => {

@@ -35,7 +35,7 @@
           <p class="note-created-date">Created: {{ createdDate }}</p>
           <p class="note-due-date">Due date: <b>{{ dueDate }}</b></p>
           <div class="note-edit-button-container">
-            <a class="note-edit-button custom-button" href="edit.html" data-note-id="{{ id }}">Edit</a>
+            <a class="note-edit-button custom-button" href="templates/edit.html" data-note-id="{{ id }}">Edit</a>
           </div>
         </div>
       {{/each}}
@@ -48,12 +48,14 @@
 
 <header class="controls">
   <div class="basic-controls">
-    <button class="add-note-button custom-button" type="button">Create new</button>
+    <div class="add-note-button-container">
+      <a class="add-note-button custom-button" href="templates/new.html">Create new</a>
+    </div>
     <form class="app-style-form">
-      <label for="app-style" class="">Darkmode</label>
+      <label for="app-style-switch" class="">Darkmode</label>
       <span class="toggle-indicator">Off</span>
       <div class="app-style-toggle-switch app-style-toggle-switch-body">
-        <input id="app-style" class="app-style-switch" name="app-style" type="checkbox">
+        <input id="app-style-switch" class="app-style-switch" name="app-style" type="checkbox">
         <div class="app-style-toggle-switch-head app-style-toggle-switch-head-on"></div>
       </div>
       <span class="toggle-indicator">On</span>
