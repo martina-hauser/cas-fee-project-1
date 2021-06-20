@@ -3,6 +3,8 @@ import noteService from '../services/note-service.js';
 moment.locale('de-ch');
 
 export class NoteController {
+  notesFromDB;
+
   constructor() {
     this.notesTemplateCompiled = Handlebars.compile(document.getElementById('note-template').innerHTML);
 
@@ -43,6 +45,12 @@ export class NoteController {
       });
     }
 
+    if (location.pathname.search('new') >= 0) {
+      console.log('??');
+      this.noteTitle = document.querySelector('#edit-note-title').value;
+      console.log(this.noteTitle);
+    }
+
     this.appStyleSwitch.addEventListener('change', () => {
       if (!this.documentBody.classList.contains('dark-mode')) {
         this.documentBody.classList.add('dark-mode');
@@ -79,7 +87,7 @@ export class NoteController {
     });
   }
 
-  showNotes() {
+  async showNotes() {
     // function getUniqueDueDates(notes) {
     //   let uniqueDueDates = new Set();
     //   notes.forEach((note) => {
@@ -109,7 +117,7 @@ export class NoteController {
     //   document.querySelector('#notes-container').insertAdjacentHTML('beforeend', createNotesFragmentHtmlString(group));
     // });
 
-    const filteredNotes = noteService.filterNotes(this.filterStateMenuSelection, noteService.notes);
+    const filteredNotes = noteService.filterNotes(this.filterStateMenuSelection, this.notesFromDB);
     const sortedNotes = noteService.sortNotes(this.sortBySelection, filteredNotes);
 
     document.querySelector('#notes-container').innerHTML = this.notesTemplateCompiled(sortedNotes);
@@ -119,9 +127,11 @@ export class NoteController {
     this.showNotes('dueDate');
   }
 
-  initialize() {
+  async initialize() {
+    console.log('Initializing...');
     this.initEventHandlers();
-    noteService.loadData();
+    this.notesFromDB = await noteService.getAllNotes();
+    // noteService.loadData();
     this.renderView();
   }
 }

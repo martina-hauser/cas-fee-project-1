@@ -5,8 +5,10 @@
   <title>Note App</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
           integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="../scripts/index.js" type="module"></script>
-  <script src="../scripts/controller/note-controller.js" type="module" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
+          integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="../scripts/controller/new-note-controller.js" type="module" defer></script>
 
   <link rel="stylesheet" href="../styles/index.css">
 </head>
@@ -15,11 +17,11 @@
   <h1 class="edit-note-title">Add note</h1>
   <form class="edit-note-form">
     <label for="edit-note-title">Title</label>
-    <input id="edit-note-title" name="edit-note-title" type="text" data-note-id="1">
+    <input id="edit-note-title" name="edit-note-title" type="text">
     <label for="edit-note-description">Description</label>
-    <textarea name="edit-note-description" id="edit-note-description" data-note-id="1"></textarea>
+    <textarea name="edit-note-description" id="edit-note-description"></textarea>
     <label for="edit-note-importance">Importance</label>
-    <select id="edit-note-importance" name="edit-note-importance" data-note-id="1">
+    <select id="edit-note-importance" name="edit-note-importance">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -27,11 +29,11 @@
       <option value="5">5</option>
     </select>
     <label for="edit-note-due-date">Due date</label>
-    <input id="edit-note-due-date" name="edit-note-due-date" type="date" data-note-id="1">
+    <input id="edit-note-due-date" name="edit-note-due-date" type="date">
     <div class="edit-note-cancel-button-container">
       <a class="edit-note-cancel-button custom-button" href="../index.html">Cancel</a>
     </div>
-    <button class="edit-note-save-button custom-button" type="submit" data-note-id="1">Save</button>
+    <button class="add-note-save-button custom-button" type="submit">Save</button>
   </form>
 </main>
 </body>
