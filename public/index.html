@@ -8,7 +8,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"
           integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-<!--  <script src="scripts/index.js" type="module"></script>-->
   <script src="scripts/controller/note-controller.js" type="module" defer></script>
 
   <script id="note-template" type="text/x-handlebars-template">
@@ -35,7 +34,7 @@
           <p class="note-created-date">Created: {{ createdDate }}</p>
           <p class="note-due-date">Due date: <b>{{ dueDate }}</b></p>
           <div class="note-edit-button-container">
-            <a class="note-edit-button custom-button" href="templates/edit.html" data-note-id="{{ id }}">Edit</a>
+            <a class="note-edit-button custom-button" href="templates/edit.html?id={{ _id }}" data-note-id="{{ _id }}">Edit</a>
           </div>
         </div>
       {{/each}}

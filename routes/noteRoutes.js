@@ -1,11 +1,12 @@
 import express from 'express';
-const router = express.Router();
-import * as noteController from '../controller/noteController';
+import {noteController} from '../controller/noteController.js';
 
-router.get('/', noteController.showNotes);
-router.post('/notes/new', noteController.addNote);
-router.get('/notes/:id/', noteController.showNote);
-router.patch('/notes/:id/', noteController.editNote);
-router.delete('/notes/:id/', noteController.deleteNote);
+const router = express.Router();
+
+router.get('/notes', noteController.getNotesFromDB);
+router.post('/notes/new', noteController.addNoteToDB);
+router.get('/notes/:id/', noteController.getNoteFromDB);
+router.patch('/notes/:id/', noteController.editNoteInDB);
+router.delete('/notes/:id/', noteController.deleteNoteInDB);
 
 export const noteRoutes = router;

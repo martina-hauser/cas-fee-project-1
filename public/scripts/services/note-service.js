@@ -1,5 +1,6 @@
 import Note from './note.js';
 import notes from './data/notemodel.js';
+import {httpService} from './http-service.js';
 
 moment.locale('de-ch');
 
@@ -56,29 +57,65 @@ class NoteService {
     }
   }
 
-  addNote(id, title, description, importance, createdDate, dueDate, finishedState, finishedDate) {
-    // neues Note in den Storage einfügen
+  formatDateForDisplay(date) {
+    return date.split('.').reverse().join('-');
+  }
+
+  async addNote(noteInput) {
     const note = new Note(
-      id,
-      title,
-      description,
-      importance,
-      createdDate,
-      dueDate,
-      finishedState,
-      finishedDate,
+      noteInput.title,
+      noteInput.description,
+      noteInput.importance,
+      noteInput.createdDate,
+      noteInput.dueDate,
+      noteInput.finishedState,
+      noteInput.finishedDate,
       );
-    this.notes.push(note);
+    const newNote = await httpService.postData('/notes/new', note)
+      .then((res) => res.json());
+    return newNote;
+  }
+
+  async updateNote(updatedNote) {
+    const changedProperties = await this.findChanges(updatedNote._id, updatedNote);
+    const receivedNote = await httpService.patchData(`/notes/${updatedNote._id}`, changedProperties)
+      .then((res) => res.json());
+    return receivedNote;
+  }
+
+  async findChanges(noteId, updatedNote) {
+    const currentlyStoredNote = await this.getNoteById(noteId);
+    const changes = {};
+    for (const noteProp in updatedNote) {
+      if (updatedNote[noteProp] !== currentlyStoredNote[noteProp]) {
+        changes[noteProp] = updatedNote[noteProp];
+      }
+    }
+    return changes;
+  }
+
+  async getNoteById(id) {
+    // return this.notes.find((note) => parseInt(id, 10) === parseInt(note.id, 10));
+    const receivedNote = await httpService.getData(`/notes/${id}`)
+      .then((res) => res.json());
+    // this.convertDataFormats(receivedNote);
+    return receivedNote;
+  }
+
+  async getAllNotes() {
+    const receivedNotes = await httpService.getData('/notes/')
+      .then((res) => res.json());
+    // [...receivedNotes].forEach((note) => {
+    //   this.convertDataFormats(note);
+    // });
+    return receivedNotes;
+  }
+
+  convertDataFormats(note) {
+    note.createdDate ? moment(note.createdDate).format('L') : '';
+    note.dueDate ? moment(note.dueDate).format('L') : '';
+    note.finishedDate ? moment(note.finishedDate).format('L') : '';
     return note;
-  }
-
-  updateNote(note) {
-    // Note im Storage aktualiseren
-  }
-
-  getNoteById(id) {
-    // Gezielt ein Note aus dem Storage abrufen
-    return this.notes.find((note) => parseInt(id, 10) === parseInt(note.id, 10));
   }
 }
 
