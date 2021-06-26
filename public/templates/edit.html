@@ -22,6 +22,8 @@
     </select>
     <label for="edit-note-due-date">Due date</label>
     <input id="edit-note-due-date" name="edit-note-due-date" type="date" value="{{ dueDate }}">
+    <button class="note-delete-button custom-button" type="button" data-note-id="{{ _id }}">Delete</button>
+
   </script>
 
   <script id="edit-note-message-template" type="text/x-handlebars-template">
