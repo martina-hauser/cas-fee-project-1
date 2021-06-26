@@ -65,24 +65,24 @@ export class NoteController {
       event.target.classList.add('active-filter');
     });
 
-    this.filterStateMenu.addEventListener('change', (event) => {
+    this.filterStateMenu.addEventListener('change', async (event) => {
       this.filterStateMenuSelection = event.target.value;
-      this.showNotes();
+      await this.initialize();
     });
 
-    this.sortByDueDateButton.addEventListener('click', () => {
+    this.sortByDueDateButton.addEventListener('click', async () => {
       this.sortBySelection = 'dueDate';
-      this.showNotes();
+      await this.initialize();
     });
 
-    this.sortByCreatedDateButton.addEventListener('click', () => {
+    this.sortByCreatedDateButton.addEventListener('click', async () => {
       this.sortBySelection = 'createdDate';
-      this.showNotes();
+      await this.initialize();
     });
 
-    this.sortByImportanceButton.addEventListener('click', () => {
+    this.sortByImportanceButton.addEventListener('click', async () => {
       this.sortBySelection = 'importance';
-      this.showNotes();
+      await this.initialize();
     });
 
     this.deleteNoteButtons = document.querySelectorAll('.note-delete-button');
@@ -109,8 +109,9 @@ export class NoteController {
         finishedState: event.target.checked,
         finishedDate: event.target.checked ? moment().format('L') : '',
       };
-      await noteService.updateNote(updatedNote)
-      await this.initialize();
+      await noteService.updateNote(updatedNote).then(async () => {
+        await this.initialize();
+      })
     });
   })
   }
