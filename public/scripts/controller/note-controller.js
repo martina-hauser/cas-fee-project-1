@@ -29,27 +29,27 @@ export class NoteController {
   }
 
   initEventHandlers() {
-    if (location.pathname.search('edit') >= 0) {
-      console.log([...this.editNoteForm.children]);
-
-      this.addNoteSaveButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        noteService.addNote();
-      });
-
-      this.editNoteSaveButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        const noteId = Number(event.target.dataset.noteId);
-        document.querySelector('h1').innerText = this.editNoteTitleInput.value;
-        noteService.updateNote(noteId);
-      });
-    }
-
-    if (location.pathname.search('new') >= 0) {
-      console.log('??');
-      this.noteTitle = document.querySelector('#edit-note-title').value;
-      console.log(this.noteTitle);
-    }
+    // if (location.pathname.search('edit') >= 0) {
+    //   console.log([...this.editNoteForm.children]);
+    //
+    //   this.addNoteSaveButton.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     noteService.addNote();
+    //   });
+    //
+    //   this.editNoteSaveButton.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     const noteId = Number(event.target.dataset.noteId);
+    //     document.querySelector('h1').innerText = this.editNoteTitleInput.value;
+    //     noteService.updateNote(noteId);
+    //   });
+    // }
+    //
+    // if (location.pathname.search('new') >= 0) {
+    //   console.log('??');
+    //   this.noteTitle = document.querySelector('#edit-note-title').value;
+    //   console.log(this.noteTitle);
+    // }
 
     this.appStyleSwitch.addEventListener('change', () => {
       if (!this.documentBody.classList.contains('dark-mode')) {
@@ -85,9 +85,22 @@ export class NoteController {
       this.sortBySelection = 'importance';
       this.showNotes();
     });
+
+    this.deleteNoteButtons = document.querySelectorAll('.note-delete-button');
+    [...this.deleteNoteButtons].forEach((deleteButton) => {
+      deleteButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const noteId = event.target.dataset.noteId;
+        const deleteConfirmed = confirm('Do you really want to delete this note?');
+        if (deleteConfirmed) {
+          await noteService.deleteNote(noteId);
+          await this.renderView();
+        }
+      });
+    })
   }
 
-  async showNotes() {
+  showNotes() {
     // function getUniqueDueDates(notes) {
     //   let uniqueDueDates = new Set();
     //   notes.forEach((note) => {
@@ -123,16 +136,16 @@ export class NoteController {
     document.querySelector('#notes-container').innerHTML = this.notesTemplateCompiled(sortedNotes);
   }
 
-  renderView() {
-    this.showNotes('dueDate');
+  async renderView() {
+    this.notesFromDB = await noteService.getAllNotes();
+    this.showNotes();
   }
 
-  async initialize() {
+  initialize() {
     console.log('Initializing...');
-    this.initEventHandlers();
-    this.notesFromDB = await noteService.getAllNotes();
-    // noteService.loadData();
-    this.renderView();
+    this.renderView().then(() => {
+      this.initEventHandlers();
+    });
   }
 }
 
