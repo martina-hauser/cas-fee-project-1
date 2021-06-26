@@ -66,6 +66,22 @@ class HttpService {
     });
     return response;
   }
+
+  async deleteData(url) {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    });
+    return response;
+  }
 }
 
 export const httpService = new HttpService();

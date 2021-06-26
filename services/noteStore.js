@@ -22,7 +22,7 @@ export class NoteStore {
   }
 
   async delete(id) {
-
+    return this.notesDB.remove({_id: id}, {multi: true});
   }
 }
 

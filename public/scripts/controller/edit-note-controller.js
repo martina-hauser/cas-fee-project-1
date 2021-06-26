@@ -15,6 +15,7 @@ export class EditNoteController {
   }
 
   initEventHandlers() {
+    this.deleteNoteButton = document.querySelector('.note-delete-button');
     this.noteTitle = document.querySelector('#edit-note-title');
     this.noteDescription = document.querySelector('#edit-note-description');
     this.noteImportance = document.querySelector('#edit-note-importance');
@@ -31,6 +32,16 @@ export class EditNoteController {
       };
       const updateFeedback = await noteService.updateNote(updatedNote);
       this.renderMessage(updateFeedback);
+    });
+
+    this.deleteNoteButton.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const noteId = event.target.dataset.noteId;
+      const deleteConfirmed = confirm('Do you really want to delete this note?');
+      if (deleteConfirmed) {
+        await noteService.deleteNote(noteId);
+        window.location.replace(window.location.origin);
+      }
     });
 
     // this.appStyleSwitch.addEventListener('change', () => {

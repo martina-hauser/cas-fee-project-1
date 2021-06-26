@@ -78,9 +78,9 @@ class NoteService {
 
   async updateNote(updatedNote) {
     const changedProperties = await this.findChanges(updatedNote._id, updatedNote);
-    const receivedNote = await httpService.patchData(`/notes/${updatedNote._id}`, changedProperties)
+    const updateFeedback = await httpService.patchData(`/notes/${updatedNote._id}`, changedProperties)
       .then((res) => res.json());
-    return receivedNote;
+    return updateFeedback;
   }
 
   async findChanges(noteId, updatedNote) {
@@ -109,6 +109,10 @@ class NoteService {
     //   this.convertDataFormats(note);
     // });
     return receivedNotes;
+  }
+
+  async deleteNote(id) {
+    await httpService.deleteData(`/notes/${id}`);
   }
 
   convertDataFormats(note) {
