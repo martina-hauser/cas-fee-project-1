@@ -33,8 +33,11 @@
           <div class="note-description">{{ description }}</div>
           <p class="note-created-date">Created: {{ createdDate }}</p>
           <p class="note-due-date">Due date: <b>{{ dueDate }}</b></p>
-          <div class="note-edit-button-container">
-            <a class="note-edit-button custom-button" href="templates/edit.html?id={{ _id }}" data-note-id="{{ _id }}">Edit</a>
+          <div class="button-container">
+            <div class="note-edit-button-container">
+              <a class="note-edit-button custom-button" href="templates/edit.html?id={{ _id }}" data-note-id="{{ _id }}">Edit</a>
+            </div>
+            <button class="note-delete-button custom-button" type="button" data-note-id="{{ _id }}">Delete</button>
           </div>
         </div>
       {{/each}}

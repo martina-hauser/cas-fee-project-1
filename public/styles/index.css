@@ -6,6 +6,8 @@
     --secondary-button-fill-color: #f0f0f0;
     --hover-button-fill-color: lightpink;
     --active-button-fill-color: skyblue;
+    --alert-button-fill-color: #f78798;
+    --hover-alert-button-fill-color: #f1536b;
     --border-style: solid 2px black;
     --box-shadow: 2px 4px black;
     --success-color: lightgreen;
@@ -189,9 +191,9 @@ label[for="app-style-switch"] {
     grid-template-columns: 1fr repeat(2, 2fr) 1fr;
     grid-template-rows: 1fr auto 1fr;
     grid-template-areas:
-        "note-state note-title note-importance note-edit-button-container"
-        "note-state note-description note-description note-edit-button-container"
-        "note-state note-created-date note-due-date note-edit-button-container";
+        "note-state note-title note-importance note-buttons"
+        "note-state note-description note-description note-buttons"
+        "note-state note-created-date note-due-date note-buttons";
     column-gap: 1rem;
     row-gap: 0.5rem;
 }
@@ -234,11 +236,32 @@ label[for="app-style-switch"] {
     grid-area: note-due-date;
 }
 
+.button-container {
+    grid-area: note-buttons;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .note-edit-button-container {
-    grid-area: note-edit-button-container;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.note-delete-button {
+    grid-area: delete-button;
+    cursor: pointer;
+    background-color: var(--alert-button-fill-color);
+}
+
+.note-delete-button:focus,
+.note-delete-button:hover {
+    background-color: var(--hover-alert-button-fill-color);
 }
 
 .note-edit-button {
@@ -253,19 +276,19 @@ label[for="app-style-switch"] {
     font-size: 0;
 }
 
-/* Edit Note Page --------------------------------------------- */
+/* New/ Edit Note Page --------------------------------------------- */
 
 body.edit-note-container {
     width: 100%;
     height: 100vh;
-    padding: 2rem 4rem;
+    padding: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .edit-note-container main {
-    width: 60%;
+    width: 50%;
     border: var(--border-style);
     box-shadow: var(--box-shadow);
     background-color: var(--card-background-color);
@@ -297,16 +320,20 @@ body.edit-note-container {
 .edit-note-form {
     padding: 2rem;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: repeat(3, 30%);
     grid-template-rows: 1.75rem 2fr repeat(2, 1.75rem) 1fr;
     grid-template-areas:
-        "edit-title-label edit-title-input"
-        "edit-description-label edit-description-textarea"
-        "edit-importance-label edit-importance-select"
-        "edit-due-date-label edit-due-date-input"
-        "edit-cancel-button edit-save-button";
+        "edit-title-label edit-title-input edit-title-input"
+        "edit-description-label edit-description-textarea edit-description-textarea"
+        "edit-importance-label edit-importance-select edit-importance-select"
+        "edit-due-date-label edit-due-date-input edit-due-date-input"
+        "delete-button edit-cancel-button edit-save-button";
     column-gap: 2rem;
     row-gap: 2rem;
+}
+
+.edit-note-form .note-delete-button {
+    margin-top: 1rem;
 }
 
 .edit-note-form input,
@@ -359,4 +386,8 @@ input#edit-note-due-date {
 .edit-note-cancel-button-container {
     grid-area: edit-cancel-button;
     margin-top: 1rem;
+}
+
+.edit-note-cancel-button-container a {
+    width: 100%;
 }
