@@ -18,6 +18,7 @@
             <input id="note-state" class="note-state" name="note-state"
                    type="checkbox"
                    value="{{ finishedState }}"
+                   data-note-id="{{ _id }}"
                    {{#if finishedState}}
                         checked
                    {{/if}}

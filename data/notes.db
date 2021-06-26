@@ -1,12 +1,10 @@
-{"title":"Exam","description":"Learn the night before","importance":"5","createdDate":"28.05.2021","dueDate":"27.06.2021","finishState":false,"finishedDate":"","_id":"Cet276JbL57Nus3G"}
-{"title":"Fix guitar","description":"Decide about whether to hand it in again","importance":"3","createdDate":"25.06.2021","dueDate":"02.07.2021","finishState":false,"finishedDate":"","_id":"Flks4gKojQxe1cbt"}
-{"title":"Homework","description":"Finish this project!","importance":"5","createdDate":"27.05.2021","dueDate":"27.06.2021","finishState":false,"finishedDate":"","_id":"Hf3Cbq0ABMPzzqc2"}
+{"title":"Exam","description":"Learn the night before","importance":"5","createdDate":"28.05.2021","dueDate":"27.06.2021","finishedState":false,"finishedDate":"","_id":"Cet276JbL57Nus3G"}
+{"title":"Fix guitar","description":"Decide about whether to hand it in again","importance":"3","createdDate":"25.06.2021","dueDate":"02.07.2021","finishedState":false,"finishedDate":"","_id":"Flks4gKojQxe1cbt"}
+{"title":"Homework","description":"Finish this project in time!","importance":"5","createdDate":"27.05.2021","dueDate":"27.06.2021","finishedState":false,"finishedDate":"","_id":"Hf3Cbq0ABMPzzqc2"}
 {"title":"Birthday Present","description":"Buy present for your fathers birthday. Ideas: Picknick basket","importance":"4","createdDate":"21.05.2021","dueDate":"21.06.2021","finishedState":true,"finishedDate":"26.06.2021","_id":"MziQOexY9B9UobR6"}
-{"title":"Still testing date formats","description":"formats...","importance":"3","createdDate":"24.06.2021","dueDate":"26.06.2021","finishState":false,"finishedDate":"","_id":"OXNUGjQkOWdJcWEG"}
-{"title":"Water plants","description":"water more often in summer","importance":"1","createdDate":"26.06.2021","dueDate":"03.07.2021","finishState":false,"finishedDate":"","_id":"WYS0C7u1wP7t8zqa"}
-{"title":"Eat icecream","description":"No space in the freezer...","importance":"5","createdDate":"26.06.2021","dueDate":"28.06.2021","finishState":false,"finishedDate":"","_id":"gGdkLCZKqssoakZb"}
-{"title":"Testing date formats meticulously","description":"Meticulously!","importance":"5","createdDate":"25.06.2021","dueDate":"27.06.2021","finishState":false,"finishedDate":"","_id":"nD8MARP6NvsrgrLt"}
-{"title":"Bake Cake","description":"Use up the bananas...","importance":"2","createdDate":"26.06.2021","dueDate":"28.06.2021","finishState":false,"finishedDate":"","_id":"zWklocqiIWUUSKD1"}
-{"$$deleted":true,"_id":"OXNUGjQkOWdJcWEG"}
-{"title":"test","description":"dfasdfas","importance":"2","createdDate":"26.06.2021","dueDate":"27.06.2021","finishedState":false,"finishedDate":"","_id":"OhW4qQbsoQZvO0BP"}
-{"$$deleted":true,"_id":"OhW4qQbsoQZvO0BP"}
+{"title":"Water plants","description":"water more often in summer","importance":"1","createdDate":"26.06.2021","dueDate":"03.07.2021","finishedState":false,"finishedDate":"","_id":"WYS0C7u1wP7t8zqa"}
+{"title":"Eat icecream","description":"No space in the freezer...","importance":"5","createdDate":"26.06.2021","dueDate":"28.06.2021","finishedState":false,"finishedDate":"","_id":"gGdkLCZKqssoakZb"}
+{"title":"Testing date formats meticulously","description":"Meticulously!","importance":"5","createdDate":"25.06.2021","dueDate":"27.06.2021","finishedState":false,"finishedDate":"","_id":"nD8MARP6NvsrgrLt"}
+{"title":"Bake Cake","description":"Use up the bananas...","importance":"2","createdDate":"26.06.2021","dueDate":"28.06.2021","finishedState":false,"finishedDate":"","_id":"zWklocqiIWUUSKD1"}
+{"title":"Eat icecream","description":"No space in the freezer...","importance":"5","createdDate":"26.06.2021","dueDate":"28.06.2021","finishedState":true,"finishedDate":"26.06.2021","_id":"gGdkLCZKqssoakZb"}
+{"title":"Eat icecream","description":"No space in the freezer...","importance":"5","createdDate":"26.06.2021","dueDate":"28.06.2021","finishedState":true,"finishedDate":"26.06.2021","_id":"gGdkLCZKqssoakZb"}

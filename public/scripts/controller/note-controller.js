@@ -18,7 +18,6 @@ export class NoteController {
     this.filterStateMenu = document.querySelector('.filter-state-select');
     this.filterStateMenuSelection = 'all';
     this.initEditNoteButton = document.querySelector('.note-edit-button');
-    this.finishNoteCheckbox = document.querySelector('.note-state');
     this.appStyleSwitch = document.querySelector('#app-style-switch');
     this.documentBody = document.querySelector('body');
 
@@ -97,7 +96,23 @@ export class NoteController {
           await this.renderView();
         }
       });
-    })
+    });
+
+    this.finishedStateCheckboxes = document.querySelectorAll('.note-state');
+    [...this.finishedStateCheckboxes].forEach((stateBox) => {
+    stateBox.addEventListener('change', async (event) => {
+      event.preventDefault();
+      console.log('change registered');
+      const noteId = event.target.dataset.noteId;
+      const updatedNote = {
+        _id: noteId,
+        finishedState: event.target.checked,
+        finishedDate: event.target.checked ? moment().format('L') : '',
+      };
+      await noteService.updateNote(updatedNote)
+      await this.initialize();
+    });
+  })
   }
 
   showNotes() {
