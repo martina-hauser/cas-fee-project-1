@@ -14,24 +14,43 @@ export class EditNoteController {
     // this.appStyleSwitch = document.querySelector('#app-style-switch');
   }
 
-  initEventHandlers() {
+  initVariablesAfterRender() {
     this.deleteNoteButton = document.querySelector('.note-delete-button');
     this.noteTitle = document.querySelector('#edit-note-title');
     this.noteDescription = document.querySelector('#edit-note-description');
     this.noteImportance = document.querySelector('#edit-note-importance');
     this.noteDueDate = document.querySelector('#edit-note-due-date');
+    this.formInputs = [this.noteTitle, this.noteDescription, this.noteImportance, this.noteDueDate];
 
+    const noteTitleBeforeChange = this.noteTitle.value;
+    const noteDescriptionBeforeChange = this.noteDescription.value;
+    const noteImportanceBeforeChange = this.noteImportance.value;
+    const noteDueDateBeforeChange = this.noteDueDate.value;
+    this.formInputsValuesBeforeChange = [
+      noteTitleBeforeChange,
+      noteDescriptionBeforeChange,
+      noteImportanceBeforeChange,
+      noteDueDateBeforeChange
+    ];
+  }
+
+  initEventHandlers() {
     this.editNoteSaveButton.addEventListener('click', async (event) => {
       event.preventDefault();
-      const updatedNote = {
-        _id: this.noteId,
-        title: this.noteTitle.value,
-        description: this.noteDescription.value,
-        importance: this.noteImportance.value,
-        dueDate: moment(this.noteDueDate.value).format('L'),
-      };
-      const updateFeedback = await noteService.updateNote(updatedNote);
-      this.renderMessage(updateFeedback);
+      if (!this.editNoteSaveButton.classList.contains('disabled-button')) {
+        const updatedNote = {
+          _id: this.noteId,
+          title: this.noteTitle.value,
+          description: this.noteDescription.value,
+          importance: this.noteImportance.value,
+          dueDate: moment(this.noteDueDate.value).format('L'),
+        };
+        const updateFeedback = await noteService.updateNote(updatedNote);
+        this.renderMessage(updateFeedback);
+        this.editNoteSaveButton.classList.add('disabled-button');
+        this.initVariablesAfterRender();
+        this.initEventHandlers();
+      }
     });
 
     this.deleteNoteButton.addEventListener('click', async (event) => {
@@ -44,6 +63,18 @@ export class EditNoteController {
       }
     });
 
+    this.formInputs.forEach((inputField) => {
+      inputField.addEventListener('input', (event) => {
+        this.removeMessage();
+        const formInputsIndex = this.formInputs.indexOf(event.target);
+        if (this.formInputsValuesBeforeChange[formInputsIndex] !== this.formInputs[formInputsIndex].value) {
+          this.editNoteSaveButton.classList.remove('disabled-button');
+        } else {
+          this.editNoteSaveButton.classList.add('disabled-button');
+        }
+      });
+    })
+
     // this.appStyleSwitch.addEventListener('change', () => {
     //   if (!this.documentBody.classList.contains('dark-mode')) {
     //     this.documentBody.classList.add('dark-mode');
@@ -53,12 +84,17 @@ export class EditNoteController {
     // });
   }
 
-  renderView() {
+  async renderView() {
+    this.noteId = window.location.search.substring(4);
+    this.noteFromDB = await noteService.getNoteById(this.noteId);
     this.noteFromDB.dueDate = noteService.formatDateForDisplay(this.noteFromDB.dueDate);
     this.editNoteForm.insertAdjacentHTML('afterbegin', this.editNoteTemplateCompiled(this.noteFromDB));
   }
 
   renderMessage(feedback) {
+    if (document.querySelector('.message') !== null) {
+      document.querySelector('.message').remove();
+    }
     let message, stylingClass = '';
     if (feedback === 1) {
       message = 'Note was successfully updated!';
@@ -70,11 +106,17 @@ export class EditNoteController {
     this.editNoteForm.insertAdjacentHTML('beforebegin', this.editNoteMessageTemplateCompiled({ stylingClass: stylingClass, message: message }));
   }
 
+  removeMessage() {
+    if (document.querySelector('.message') !== null) {
+      document.querySelector('.message').remove();
+    }
+  }
+
   async initialize() {
-    this.noteId = window.location.search.substring(4);
-    this.noteFromDB = await noteService.getNoteById(this.noteId);
-    this.renderView();
-    this.initEventHandlers();
+    this.renderView().then(() => {
+      this.initVariablesAfterRender();
+      this.initEventHandlers();
+    });
   }
 }
 
