@@ -1,17 +1,21 @@
 import noteService from '../services/note-service.js';
+import CommonController from './common-controller.js';
 
 moment.locale('de-ch');
 
-export class EditNoteController {
+export class EditNoteController extends CommonController {
   noteFromDB;
   noteId;
 
   constructor() {
+    super();
     this.editNoteTemplateCompiled = Handlebars.compile(document.getElementById('edit-note-template').innerHTML);
     this.editNoteMessageTemplateCompiled = Handlebars.compile(document.getElementById('edit-note-message-template').innerHTML);
+    this.documentBody = document.querySelector('body');
     this.editNoteForm = document.querySelector('#edit-note-form');
+    this.editNoteCancelButton = document.querySelector('.edit-note-cancel-button');
     this.editNoteSaveButton = document.querySelector('.edit-note-save-button');
-    // this.appStyleSwitch = document.querySelector('#app-style-switch');
+    this.isDarkMode = false;
   }
 
   initVariablesAfterRender() {
@@ -35,6 +39,16 @@ export class EditNoteController {
   }
 
   initEventHandlers() {
+    this.appStyleSwitch.addEventListener('change', (event) => {
+      this.isDarkMode = !this.isDarkMode;
+      if (this.isDarkMode) {
+        window.location.hash = 'darkmode';
+      } else {
+        window.history.pushState('', '', window.location.pathname + window.location.search);
+      }
+      this.checkForDarkMode(this.editNoteCancelButton, false);
+    });
+
     this.editNoteSaveButton.addEventListener('click', async (event) => {
       event.preventDefault();
       if (!this.editNoteSaveButton.classList.contains('disabled-button')) {
@@ -59,7 +73,7 @@ export class EditNoteController {
       const deleteConfirmed = confirm('Do you really want to delete this note?');
       if (deleteConfirmed) {
         await noteService.deleteNote(noteId);
-        window.location.replace(window.location.origin);
+        window.location.replace(window.location.origin + window.location.hash);
       }
     });
 
@@ -74,14 +88,6 @@ export class EditNoteController {
         }
       });
     })
-
-    // this.appStyleSwitch.addEventListener('change', () => {
-    //   if (!this.documentBody.classList.contains('dark-mode')) {
-    //     this.documentBody.classList.add('dark-mode');
-    //   } else {
-    //     this.documentBody.classList.remove('dark-mode');
-    //   }
-    // });
   }
 
   async renderView() {
@@ -89,6 +95,7 @@ export class EditNoteController {
     this.noteFromDB = await noteService.getNoteById(this.noteId);
     this.noteFromDB.dueDate = noteService.formatDateForDisplay(this.noteFromDB.dueDate);
     this.editNoteForm.insertAdjacentHTML('afterbegin', this.editNoteTemplateCompiled(this.noteFromDB));
+    this.checkForDarkMode(this.editNoteCancelButton, false);
   }
 
   renderMessage(feedback) {

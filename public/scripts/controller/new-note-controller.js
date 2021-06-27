@@ -1,13 +1,13 @@
 import noteService from '../services/note-service.js';
+import CommonController from './common-controller.js';
 
 moment.locale('de-ch');
 
-export class NewNoteController {
+export class NewNoteController extends CommonController {
 
   constructor() {
-    this.notesContainer = document.querySelector('.notes-container');
-    // this.appStyleSwitch = document.querySelector('#app-style-switch');
-    this.documentBody = document.querySelector('body');
+    super();
+    this.isDarkMode = false;
 
     this.editNoteForm = document.querySelector('.edit-note-form');
     this.addNoteSaveButton = document.querySelector('.add-note-save-button');
@@ -19,22 +19,6 @@ export class NewNoteController {
   }
 
   initEventHandlers() {
-    // if (location.pathname.search('edit') >= 0) {
-    //   console.log([...this.editNoteForm.children]);
-    //
-    //   this.addNoteSaveButton.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     noteService.addNote();
-    //   });
-    //
-    //   this.editNoteSaveButton.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     const noteId = Number(event.target.dataset.noteId);
-    //     document.querySelector('h1').innerText = this.editNoteTitleInput.value;
-    //     noteService.updateNote(noteId);
-    //   });
-    // }
-
     this.addNoteSaveButton.addEventListener('click', async (event) => {
       event.preventDefault();
       const newNote = {
@@ -50,17 +34,20 @@ export class NewNoteController {
       window.location.replace(`${window.location.origin}/templates/edit.html?id=${result._id}`);
     });
 
-    // this.appStyleSwitch.addEventListener('change', () => {
-    //   if (!this.documentBody.classList.contains('dark-mode')) {
-    //     this.documentBody.classList.add('dark-mode');
-    //   } else {
-    //     this.documentBody.classList.remove('dark-mode');
-    //   }
-    // });
+    this.appStyleSwitch.addEventListener('change', () => {
+      this.isDarkMode = !this.isDarkMode;
+      if (this.isDarkMode) {
+        window.location.hash = 'darkmode';
+      } else {
+        window.history.pushState('', '', window.location.pathname + window.location.search);
+      }
+      this.checkForDarkMode(this.editNoteCancelButton, false);
+    });
   }
 
   async initialize() {
     this.initEventHandlers();
+    this.checkForDarkMode(this.editNoteCancelButton, false);
   }
 }
 
