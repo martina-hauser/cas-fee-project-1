@@ -1,15 +1,13 @@
-import noteService from '../services/note-service.js';
 import CommonController from './common-controller.js';
+import noteService from '../services/note-service.js';
 
 moment.locale('de-ch');
 
 export class NewNoteController extends CommonController {
-
   constructor() {
     super();
     this.isDarkMode = false;
 
-    this.addNoteForm = document.querySelector('.add-note-form');
     this.addNoteSaveButton = document.querySelector('.add-note-save-button');
     this.noteTitle = document.querySelector('#add-note-title');
     this.noteDescription = document.querySelector('#add-note-description');
@@ -45,7 +43,7 @@ export class NewNoteController extends CommonController {
     });
   }
 
-  async initialize() {
+  initialize() {
     this.initEventHandlers();
     this.checkForDarkMode(this.addNoteCancelButton, false);
   }

@@ -1,13 +1,12 @@
-import noteService from '../services/note-service.js';
 import CommonController from './common-controller.js';
+import noteService from '../services/note-service.js';
 
 moment.locale('de-ch');
 
 export class NoteController extends CommonController {
-  notesFromDB;
-
   constructor() {
     super();
+    this.notesFromDB;
     this.notesTemplateCompiled = Handlebars.compile(document.getElementById('note-template').innerHTML);
 
     this.addNoteButton = document.querySelector('.add-note-button');
@@ -23,16 +22,15 @@ export class NoteController extends CommonController {
 
   initEventHandlers() {
     this.initEditNoteButtons = document.querySelectorAll('.note-edit-button');
-    this.appStyleSwitch.addEventListener('click', (event) => {
+    this.appStyleSwitch.addEventListener('click', () => {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
         window.location.hash = 'darkmode';
       } else {
-        history.pushState('', '', window.location.pathname + window.location.search);
+        window.history.pushState('', '', window.location.pathname + window.location.search);
       }
       this.checkForDarkMode([...this.initEditNoteButtons], true);
       this.checkForDarkMode(this.addNoteButton, false);
-
     });
 
     this.filterButtons.addEventListener('click', (event) => {
@@ -44,22 +42,26 @@ export class NoteController extends CommonController {
 
     this.filterStateMenu.addEventListener('change', async (event) => {
       this.filterStateMenuSelection = event.target.value;
-      await this.initialize();
+      await this.showNotes();
+      await this.initEventHandlers();
     });
 
     this.sortByDueDateButton.addEventListener('click', async () => {
       this.sortBySelection = 'dueDate';
-      await this.initialize();
+      await this.showNotes();
+      await this.initEventHandlers();
     });
 
     this.sortByCreatedDateButton.addEventListener('click', async () => {
       this.sortBySelection = 'createdDate';
-      await this.initialize();
+      await this.showNotes();
+      await this.initEventHandlers();
     });
 
     this.sortByImportanceButton.addEventListener('click', async () => {
       this.sortBySelection = 'importance';
-      await this.initialize();
+      await this.showNotes();
+      await this.initEventHandlers();
     });
 
     this.deleteNoteButtons = document.querySelectorAll('.note-delete-button');
@@ -70,6 +72,7 @@ export class NoteController extends CommonController {
         const deleteConfirmed = confirm('Do you really want to delete this note?');
         if (deleteConfirmed) {
           await noteService.deleteNote(noteId);
+          await this.loadData();
           await this.renderView();
         }
       });
@@ -87,49 +90,23 @@ export class NoteController extends CommonController {
       };
       await noteService.updateNote(updatedNote).then(async () => {
         await this.initialize();
-      })
+      });
     });
-  })
+  });
   }
 
   showNotes() {
-    // function getUniqueDueDates(notes) {
-    //   let uniqueDueDates = new Set();
-    //   notes.forEach((note) => {
-    //     uniqueDueDates.add(note.dueDate);
-    //   });
-    //   return uniqueDueDates;
-    // }
-    //
-    // function checkDueDate(note) {
-    //   return note.dueDate === this.toString();
-    // }
-    //
-    // function getNoteGroups(notes) {
-    //   const uniqueDates = getUniqueDueDates(notes);
-    //   let noteGroups = [];
-    //   uniqueDates.forEach((dueDate) => {
-    //     noteGroups.push(notes.filter(checkDueDate, dueDate));
-    //   });
-    //   return noteGroups;
-    // }
-    //
-    // const noteGroups = getNoteGroups(sampleNotes);
-    //
-    // noteGroups.forEach((group) => {
-    //   const notesFragmentTemplateSource = document.getElementById('entry-template').innerHTML;
-    //   const createNotesFragmentHtmlString = Handlebars.compile(notesFragmentTemplateSource);
-    //   document.querySelector('#notes-container').insertAdjacentHTML('beforeend', createNotesFragmentHtmlString(group));
-    // });
-
     const filteredNotes = noteService.filterNotes(this.filterStateMenuSelection, this.notesFromDB);
     const sortedNotes = noteService.sortNotes(this.sortBySelection, filteredNotes);
 
     document.querySelector('#notes-container').innerHTML = this.notesTemplateCompiled(sortedNotes);
   }
 
-  async renderView() {
+  async loadData() {
     this.notesFromDB = await noteService.getAllNotes();
+  }
+
+  renderView() {
     this.showNotes();
     this.initEditNoteButtons = document.querySelectorAll('.note-edit-button');
     this.checkForDarkMode([...this.initEditNoteButtons], true);
@@ -137,9 +114,10 @@ export class NoteController extends CommonController {
   }
 
   initialize() {
-    console.log('Initializing...');
-    this.renderView().then(() => {
-      this.initEventHandlers();
+    this.loadData()
+      .then(() => {
+        this.renderView();
+        this.initEventHandlers();
     });
   }
 }

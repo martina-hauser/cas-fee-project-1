@@ -6,4 +6,18 @@ Handlebars.registerHelper('option', function (importance) {
     template += `<option value="${i}" ${selected}>${i}</option>\n`;
   }
   return new Handlebars.SafeString(template);
-})
+});
+
+class MessageHelper {
+  static removeMessage() {
+    if (document.querySelector('.message') !== null) {
+      document.querySelector('.message').remove();
+    }
+  }
+}
+
+class DisplayHelper {
+  static formatDateForDisplay(date) {
+    return date.split('.').reverse().join('-');
+  }
+}

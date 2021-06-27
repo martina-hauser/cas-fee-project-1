@@ -1,14 +1,13 @@
-import noteService from '../services/note-service.js';
 import CommonController from './common-controller.js';
+import noteService from '../services/note-service.js';
 
 moment.locale('de-ch');
 
 export class EditNoteController extends CommonController {
-  noteFromDB;
-  noteId;
-
   constructor() {
     super();
+    this.noteFromDB;
+    this.noteId;
     this.editNoteTemplateCompiled = Handlebars.compile(document.getElementById('edit-note-template').innerHTML);
     this.editNoteMessageTemplateCompiled = Handlebars.compile(document.getElementById('edit-note-message-template').innerHTML);
     this.documentBody = document.querySelector('body');
@@ -34,12 +33,12 @@ export class EditNoteController extends CommonController {
       noteTitleBeforeChange,
       noteDescriptionBeforeChange,
       noteImportanceBeforeChange,
-      noteDueDateBeforeChange
+      noteDueDateBeforeChange,
     ];
   }
 
   initEventHandlers() {
-    this.appStyleSwitch.addEventListener('click', (event) => {
+    this.appStyleSwitch.addEventListener('click', () => {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
         window.location.hash = 'darkmode';
@@ -79,21 +78,27 @@ export class EditNoteController extends CommonController {
 
     this.formInputs.forEach((inputField) => {
       inputField.addEventListener('input', (event) => {
-        this.removeMessage();
+        MessageHelper.removeMessage();
         const formInputsIndex = this.formInputs.indexOf(event.target);
-        if (this.formInputsValuesBeforeChange[formInputsIndex] !== this.formInputs[formInputsIndex].value) {
+        if (
+          this.formInputsValuesBeforeChange[formInputsIndex]
+          !== this.formInputs[formInputsIndex].value
+        ) {
           this.editNoteSaveButton.classList.remove('disabled-button');
         } else {
           this.editNoteSaveButton.classList.add('disabled-button');
         }
       });
-    })
+    });
   }
 
-  async renderView() {
+  async loadData() {
     this.noteId = window.location.search.substring(4);
     this.noteFromDB = await noteService.getNoteById(this.noteId);
-    this.noteFromDB.dueDate = noteService.formatDateForDisplay(this.noteFromDB.dueDate);
+    this.noteFromDB.dueDate = DisplayHelper.formatDateForDisplay(this.noteFromDB.dueDate);
+  }
+
+  renderView() {
     this.editNoteForm.insertAdjacentHTML('afterbegin', this.editNoteTemplateCompiled(this.noteFromDB));
     this.checkForDarkMode(this.editNoteCancelButton, false);
   }
@@ -102,7 +107,8 @@ export class EditNoteController extends CommonController {
     if (document.querySelector('.message') !== null) {
       document.querySelector('.message').remove();
     }
-    let message, stylingClass = '';
+    let message = '';
+    let stylingClass = '';
     if (feedback === 1) {
       message = 'Note was successfully updated!';
       stylingClass = 'success-message';
@@ -113,17 +119,13 @@ export class EditNoteController extends CommonController {
     this.editNoteForm.insertAdjacentHTML('beforebegin', this.editNoteMessageTemplateCompiled({ stylingClass: stylingClass, message: message }));
   }
 
-  removeMessage() {
-    if (document.querySelector('.message') !== null) {
-      document.querySelector('.message').remove();
-    }
-  }
-
-  async initialize() {
-    this.renderView().then(() => {
-      this.initVariablesAfterRender();
-      this.initEventHandlers();
-    });
+  initialize() {
+    this.loadData()
+      .then(() => {
+        this.renderView();
+        this.initVariablesAfterRender();
+        this.initEventHandlers();
+      });
   }
 }
 
