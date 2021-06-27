@@ -17,6 +17,21 @@
     "import/extensions": "off",
     "object-curly-newline": "off",
     "object-curly-spacing": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "no-underscore-dangle": "off",
+    "no-undef": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    "no-restricted-syntax": "off",
+    "import/prefer-default-export": "off",
+    "object-shorthand": "off",
+    "no-unused-expressions": "off",
+    "no-restricted-globals": "off",
+    "prefer-destructuring": "off",
+    "no-alert": "off",
+    "no-unused-vars": "off",
+    "max-classes-per-file": "off"
   }
 }
