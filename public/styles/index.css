@@ -1,6 +1,7 @@
 :root {
     --body-background-color: lightblue;
     --body-font-color: black;
+    --select-color: inherit;
     --card-background-color: white;
     --primary-button-fill-color: yellow;
     --secondary-button-fill-color: #f0f0f0;
@@ -16,20 +17,21 @@
 }
 
 .dark-mode {
-    --body-background-color: #072b36;
-    --body-font-color: white;
-    --card-background-color: #044052;
-    --primary-button-fill-color: #810947;
-    --secondary-button-fill-color: #757481;
-    --hover-button-fill-color: #4F062C;
-    --active-button-fill-color: #b09bb4;
-    --alert-button-fill-color: orange;
-    --hover-alert-button-fill-color: darkorange;
-    --disabled-button-fill-color: grey;
-    --border-style: solid 2px white;
-    --box-shadow: 2px 4px white;
-    --success-color: green;
-    --alert-color: red;
+    --body-background-color: #151219;
+    --body-font-color: #f3f2f0;
+    --select-color: black;
+    --card-background-color: #575559;
+    --primary-button-fill-color: #394040;
+    --secondary-button-fill-color: #0d0d0d;
+    --hover-button-fill-color: #465559;
+    --active-button-fill-color: #403b39;
+    --alert-button-fill-color: #a7292c;
+    --hover-alert-button-fill-color: #250000;
+    --disabled-button-fill-color: #b0a7a4;
+    --border-style: solid 2px #f3f2f0;
+    --box-shadow: 2px 4px #f3f2f0;
+    --success-color: #447452;
+    --alert-color: #a7292c;
 }
 
 *,
@@ -333,6 +335,10 @@ select {
     padding: 0.25rem;
     font-family: inherit;
     font-size: 0.9em;
+}
+
+.edit-note-form select {
+    color: var(--select-color);
 }
 
 label[for="edit-note-title"] {
