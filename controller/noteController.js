@@ -2,7 +2,6 @@ import {noteStore} from '../services/noteStore.js';
 
 export class NoteController {
   async getNotesFromDB(req, res) {
-    res.type('application/json');
     res.json(await noteStore.getAll());
   }
 
@@ -11,7 +10,6 @@ export class NoteController {
   }
 
   async getNoteFromDB(req, res) {
-    res.type('application/json');
     res.json(await noteStore.getOne(req.params.id));
   }
 
