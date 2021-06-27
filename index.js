@@ -1,4 +1,4 @@
-const app = (import('./app.js')).app;
+const app = (await import('./app.js')).app;
 const port = 3000;
 const hostname = '127.0.0.1';
 
