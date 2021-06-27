@@ -176,10 +176,6 @@ input[type=checkbox] {
     row-gap: 0.5rem;
 }
 
-[class^='note-'] {
-    /* margin: 1rem; */
-}
-
 .note-date {
     font-size: 2rem;
     font-weight: bold;
@@ -265,6 +261,7 @@ input[type=checkbox] {
 
 /* New/ Edit Note Page --------------------------------------------- */
 
+body.add-note-container,
 body.edit-note-container {
     width: 100%;
     height: 100vh;
@@ -274,12 +271,14 @@ body.edit-note-container {
     align-items: center;
 }
 
+.add-note-container header,
 .edit-note-container header {
     width: 50%;
     text-align: right;
     margin-bottom: 1rem;
 }
 
+.add-note-container main,
 .edit-note-container main {
     width: 50%;
     border: var(--border-style);
@@ -287,12 +286,15 @@ body.edit-note-container {
     background-color: var(--card-background-color);
 }
 
+.add-note-title,
 .edit-note-title,
+.add-note-cancel-button-container,
 .edit-note-cancel-button-container {
     background-color: var(--card-background-color);
     width: 100%;
 }
 
+.add-note-title,
 .edit-note-title {
     padding: 2rem 2rem 0;
 }
@@ -310,6 +312,7 @@ body.edit-note-container {
     background-color: var(--alert-color);
 }
 
+.add-note-form,
 .edit-note-form {
     padding: 2rem;
     display: grid;
@@ -329,46 +332,58 @@ body.edit-note-container {
     margin-top: 1rem;
 }
 
+.add-note-form input,
+.add-note-form textarea,
+.add-note-form select,
 .edit-note-form input,
-textarea,
-select {
+.edit-note-form textarea,
+.edit-note-form select {
     padding: 0.25rem;
     font-family: inherit;
     font-size: 0.9em;
 }
 
+.add-note-form select,
 .edit-note-form select {
     color: var(--select-color);
 }
 
+label[for="add-note-title"],
 label[for="edit-note-title"] {
     grid-area: edit-title-label;
 }
 
+input#add-note-title,
 input#edit-note-title {
     grid-area: edit-title-input;
 }
 
+label[for="add-note-description"],
 label[for="edit-note-description"] {
     grid-area: edit-description-label;
 }
 
+textarea#add-note-description,
 textarea#edit-note-description {
     grid-area: edit-description-textarea;
 }
 
+label[for="add-note-importance"],
 label[for="edit-note-importance"] {
     grid-area: edit-importance-label;
 }
 
+select#add-note-importance,
 select#edit-note-importance {
     grid-area: edit-importance-select;
 }
 
+label[for="add-note-due-date"],
 label[for="edit-note-due-date"] {
     grid-area: edit-due-date-label;
 }
 
+input#add-note-due-date,
 input#edit-note-due-date {
     grid-area: edit-due-date-input;
 }
@@ -380,11 +395,13 @@ input#edit-note-due-date {
     background-color: var(--primary-button-fill-color);
 }
 
+.add-note-cancel-button-container,
 .edit-note-cancel-button-container {
     grid-area: edit-cancel-button;
     margin-top: 1rem;
 }
 
+.add-note-cancel-button-container a,
 .edit-note-cancel-button-container a {
     width: 100%;
 }

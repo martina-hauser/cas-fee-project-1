@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../styles/index.css">
 </head>
-<body class="edit-note-container">
+<body class="add-note-container">
 <header>
   <button id="app-style-switch" class="custom-button" title="Darkmode Switch">
     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" class="svg-inline--fa fa-sun fa-w-16 sun"
@@ -28,24 +28,24 @@
   </button>
 </header>
 <main>
-  <h1 class="edit-note-title">Add note</h1>
-  <form class="edit-note-form">
-    <label for="edit-note-title">Title</label>
-    <input id="edit-note-title" name="edit-note-title" type="text">
-    <label for="edit-note-description">Description</label>
-    <textarea name="edit-note-description" id="edit-note-description"></textarea>
-    <label for="edit-note-importance">Importance</label>
-    <select id="edit-note-importance" name="edit-note-importance">
+  <h1 class="add-note-title">Add note</h1>
+  <form class="add-note-form">
+    <label for="add-note-title">Title</label>
+    <input id="add-note-title" name="add-note-title" type="text">
+    <label for="add-note-description">Description</label>
+    <textarea name="add-note-description" id="add-note-description"></textarea>
+    <label for="add-note-importance">Importance</label>
+    <select id="add-note-importance" name="add-note-importance">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
     </select>
-    <label for="edit-note-due-date">Due date</label>
-    <input id="edit-note-due-date" name="edit-note-due-date" type="date">
-    <div class="edit-note-cancel-button-container">
-      <a class="edit-note-cancel-button custom-button" href="../index.html">Cancel</a>
+    <label for="add-note-due-date">Due date</label>
+    <input id="add-note-due-date" name="add-note-due-date" type="date">
+    <div class="add-note-cancel-button-container">
+      <a class="add-note-cancel-button custom-button" href="../index.html">Cancel</a>
     </div>
     <button class="add-note-save-button custom-button" type="submit">Save</button>
   </form>

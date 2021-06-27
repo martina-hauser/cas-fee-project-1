@@ -9,13 +9,13 @@ export class NewNoteController extends CommonController {
     super();
     this.isDarkMode = false;
 
-    this.editNoteForm = document.querySelector('.edit-note-form');
+    this.addNoteForm = document.querySelector('.add-note-form');
     this.addNoteSaveButton = document.querySelector('.add-note-save-button');
-    this.noteTitle = document.querySelector('#edit-note-title');
-    this.noteDescription = document.querySelector('#edit-note-description');
-    this.noteImportance = document.querySelector('#edit-note-importance');
-    this.noteDueDate = document.querySelector('#edit-note-due-date');
-    this.editNoteCancelButton = document.querySelector('.edit-note-cancel-button');
+    this.noteTitle = document.querySelector('#add-note-title');
+    this.noteDescription = document.querySelector('#add-note-description');
+    this.noteImportance = document.querySelector('#add-note-importance');
+    this.noteDueDate = document.querySelector('#add-note-due-date');
+    this.addNoteCancelButton = document.querySelector('.add-note-cancel-button');
   }
 
   initEventHandlers() {
@@ -41,13 +41,13 @@ export class NewNoteController extends CommonController {
       } else {
         window.history.pushState('', '', window.location.pathname + window.location.search);
       }
-      this.checkForDarkMode(this.editNoteCancelButton, false);
+      this.checkForDarkMode(this.addNoteCancelButton, false);
     });
   }
 
   async initialize() {
     this.initEventHandlers();
-    this.checkForDarkMode(this.editNoteCancelButton, false);
+    this.checkForDarkMode(this.addNoteCancelButton, false);
   }
 }
 
