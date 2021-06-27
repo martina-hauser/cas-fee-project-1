@@ -101,6 +101,7 @@ export class EditNoteController extends CommonController {
   renderView() {
     this.editNoteForm.insertAdjacentHTML('afterbegin', this.editNoteTemplateCompiled(this.noteFromDB));
     this.checkForDarkMode(this.editNoteCancelButton, false);
+    this.dontAllowPastDueDate(document.querySelector('#edit-note-due-date'));
   }
 
   renderMessage(feedback) {

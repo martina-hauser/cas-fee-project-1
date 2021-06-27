@@ -46,4 +46,10 @@ export default class CommonController {
       this.removeDarkModeAttributes(buttonList);
     }
   }
+
+  dontAllowPastDueDate(noteInput) {
+    let today = moment().format('L');
+    today = DisplayHelper.formatDateForDisplay(today);
+    noteInput.setAttribute('min', today);
+  }
 }

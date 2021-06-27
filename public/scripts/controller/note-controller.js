@@ -72,8 +72,7 @@ export class NoteController extends CommonController {
         const deleteConfirmed = confirm('Do you really want to delete this note?');
         if (deleteConfirmed) {
           await noteService.deleteNote(noteId);
-          await this.loadData();
-          await this.renderView();
+          this.initialize();
         }
       });
     });

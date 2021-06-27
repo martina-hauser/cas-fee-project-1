@@ -46,6 +46,7 @@ export class NewNoteController extends CommonController {
   initialize() {
     this.initEventHandlers();
     this.checkForDarkMode(this.addNoteCancelButton, false);
+    this.dontAllowPastDueDate(this.noteDueDate);
   }
 }
 
