@@ -60,13 +60,13 @@ class NoteService {
       noteInput.finishedState,
       noteInput.finishedDate,
       );
-    const newNote = await httpService.exchangeData('POST', '/notes/new', note)
+    const newNote = await httpService.exchangeData('POST', '/notes/new', note);
     return newNote;
   }
 
   async updateNote(updatedNote) {
     const changedProperties = await this.findChanges(updatedNote._id, updatedNote);
-    const updateFeedback = await httpService.exchangeData('PATCH', `/notes/${updatedNote._id}`, changedProperties)
+    const updateFeedback = await httpService.exchangeData('PATCH', `/notes/${updatedNote._id}`, changedProperties);
     return updateFeedback;
   }
 
@@ -82,12 +82,12 @@ class NoteService {
   }
 
   async getNoteById(id) {
-    const receivedNote = await httpService.exchangeData('GET', `/notes/${id}`)
+    const receivedNote = await httpService.exchangeData('GET', `/notes/${id}`);
     return receivedNote;
   }
 
   async getAllNotes() {
-    const receivedNotes = await httpService.exchangeData('GET', '/notes/')
+    const receivedNotes = await httpService.exchangeData('GET', '/notes/');
     return receivedNotes;
   }
 
