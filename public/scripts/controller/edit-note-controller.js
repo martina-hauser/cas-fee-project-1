@@ -39,7 +39,7 @@ export class EditNoteController extends CommonController {
   }
 
   initEventHandlers() {
-    this.appStyleSwitch.addEventListener('change', (event) => {
+    this.appStyleSwitch.addEventListener('click', (event) => {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
         window.location.hash = 'darkmode';

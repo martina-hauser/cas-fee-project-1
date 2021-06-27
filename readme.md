@@ -25,3 +25,11 @@ Folgende Befehle sind dann möglich
 | npm run eslint  |  Testet ob die JS Files in Ordnung sind. |
 | npm run all  |   Führt die Tests für CSS/HTML/JS aus. |
 | npm run start  |  Started den Web-Server: http://localhost:3000 |
+
+
+  
+### Credits
+
+The sun and moon icons used for the darkmode button are licensed under the [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/). Other than changing the color, no changes have been made.
+Sun icon via [Fontawesome](https://fontawesome.com/v5.15/icons/sun?style=solid).
+Moon icon as well via [Fontawesome](https://fontawesome.com/v5.15/icons/moon?style=solid).

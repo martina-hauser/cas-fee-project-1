@@ -34,7 +34,7 @@ export class NewNoteController extends CommonController {
       window.location.replace(`${window.location.origin}/templates/edit.html?id=${result._id}`);
     });
 
-    this.appStyleSwitch.addEventListener('change', () => {
+    this.appStyleSwitch.addEventListener('click', () => {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
         window.location.hash = 'darkmode';

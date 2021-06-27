@@ -23,7 +23,7 @@ export class NoteController extends CommonController {
 
   initEventHandlers() {
     this.initEditNoteButtons = document.querySelectorAll('.note-edit-button');
-    this.appStyleSwitch.addEventListener('change', (event) => {
+    this.appStyleSwitch.addEventListener('click', (event) => {
       this.isDarkMode = !this.isDarkMode;
       if (this.isDarkMode) {
         window.location.hash = 'darkmode';
