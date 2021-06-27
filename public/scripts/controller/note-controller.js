@@ -102,7 +102,6 @@ export class NoteController {
     [...this.finishedStateCheckboxes].forEach((stateBox) => {
     stateBox.addEventListener('change', async (event) => {
       event.preventDefault();
-      console.log('change registered');
       const noteId = event.target.dataset.noteId;
       const updatedNote = {
         _id: noteId,

@@ -8,6 +8,7 @@
     --active-button-fill-color: skyblue;
     --alert-button-fill-color: #f78798;
     --hover-alert-button-fill-color: #f1536b;
+    --disabled-button-fill-color: #e0e0cb;
     --border-style: solid 2px black;
     --box-shadow: 2px 4px black;
     --success-color: lightgreen;
@@ -22,6 +23,9 @@
     --secondary-button-fill-color: #757481;
     --hover-button-fill-color: #4F062C;
     --active-button-fill-color: #b09bb4;
+    --alert-button-fill-color: orange;
+    --hover-alert-button-fill-color: darkorange;
+    --disabled-button-fill-color: grey;
     --border-style: solid 2px white;
     --box-shadow: 2px 4px white;
     --success-color: green;
@@ -266,6 +270,15 @@ label[for="app-style-switch"] {
 
 .note-edit-button {
     background-color: var(--primary-button-fill-color);
+}
+
+.disabled-button {
+    background-color: var(--disabled-button-fill-color) !important;
+}
+
+.disabled-button:focus,
+.disabled-button:hover {
+    background-color: var(--disabled-button-fill-color) !important;
 }
 
 .hidden-label {
